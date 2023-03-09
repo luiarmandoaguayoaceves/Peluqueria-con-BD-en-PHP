@@ -6,14 +6,25 @@
 
         //Realizar consulta
         $sql = "SELECT * FROM servicios;";
-        $consulta = mysqli_query($db, $sql);
+        $consultas = mysqli_query($db, $sql);
         
         
         //Mostrar resultado
-        echo '<pre>';
-        var_dump(mysqli_fetch_assoc($consulta));//assoc para un solo registro otros para mas resultados
-        echo '</pre>';
+        // while($row = mysqli_fetch_assoc($consultas)){//While para iterar
+        // echo '<pre>';
+        // var_dump($row);
+        // echo '</pre>';
+        // }
 
+
+        //Crear un arreglo
+        $servicios = array();
+        while ($row = mysqli_fetch_assoc($consultas)){
+            $servicios[] = $row ;
+        }
+        echo '<pre>';
+        var_dump(json_encode($servicios));
+        echo '</pre>';
 
     } catch (\Throwable $th) {
         var_dump($th);
